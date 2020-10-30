@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import { PlayerCharacter } from './playerCharacter';
+import { Enemy} from './enemy'
 
 class BattleScene extends Phaser.Scene {
    
@@ -23,17 +25,17 @@ class BattleScene extends Phaser.Scene {
 
     startBattle() {
         // player character - warrior
-        var warrior = new PlayerCharacter(this, 250, 50, "player", 1, "Warrior", 100, 20);        
+        const warrior = new PlayerCharacter(this, 250, 50, "player", 1, "Warrior", 100, 20);        
         this.add.existing(warrior);
         
         // player character - mage
-        var mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
+        const mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
         this.add.existing(mage);            
         
-        var dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
+        const dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
         this.add.existing(dragonblue);
         
-        var dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
+        const dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
         this.add.existing(dragonOrange);
         
         // array with heroes
@@ -64,7 +66,8 @@ class BattleScene extends Phaser.Scene {
             if(this.index >= this.units.length) {
                 this.index = 0;
             }
-        }while(this.units[this.index].living);
+            console.log('unit', this.units[this.index].type);
+        }while(!this.units[this.index].living);
 
         if(this.units[this.index]) {
             // if its player hero

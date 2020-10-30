@@ -1,4 +1,8 @@
 import Phaser from "phaser";
+import { HeroesMenu } from './heroesmenu'
+import { ActionsMenu } from './actionmenu'
+import { EnemiesMenu } from './enemiesmenu'
+import { Message } from './message'
 
 class UIScene extends Phaser.Scene {
     constructor(){
@@ -84,6 +88,11 @@ class UIScene extends Phaser.Scene {
     }
 
     onSelectEnemies() {
+        this.currentMenu = this.enemiesMenu;
+        this.enemiesMenu.select(0);
+    }
+
+    onSelectedAction() {
         this.currentMenu = this.enemiesMenu;
         this.enemiesMenu.select(0);
     }

@@ -1,4 +1,4 @@
-import {} from './menuItem'
+import { MenuItem } from './menuItem'
 
 class Menu extends Phaser.GameObjects.Container {
     
