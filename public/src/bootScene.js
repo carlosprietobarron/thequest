@@ -16,11 +16,13 @@ class BootScene extends Phaser.Scene {
         //load bg image
         this.load.image("bg", "./assets/theQuestCover.png" );
 
+        //load items images
+        this.load.spritesheet('item', './assets/items.png', { frameWidth: 16, frameHeight: 16 });
         // map tiles
-        this.load.image('tiles', './assets/map/spritesheet.png');
+        this.load.image('tiles', './assets/map/roguelikeSheet.png');
         
         // map in json format
-        this.load.tilemapTiledJSON('map', './assets/map/map.json');
+        this.load.tilemapTiledJSON('map', './assets/map/finalmap.json');
         
         // our two characters
         this.load.spritesheet('player', './assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });

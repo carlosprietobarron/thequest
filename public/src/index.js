@@ -9,6 +9,7 @@ import { UIScene } from './UIScene'
     parent: 'content',
     width: 320,
     height: 240,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
     zoom: 2,
     pixelArt: true,
     physics: {
