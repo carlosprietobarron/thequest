@@ -1,14 +1,13 @@
-import { Menu } from './menu'
+import { Menu } from './menu';
 
-class EnemiesMenu extends Menu{
-    
-    constructor(x, y, scene) {
-        super(x, y, scene);        
-    }
+class EnemiesMenu extends Menu {
+  constructor(x, y, scene) {
+    super(x, y, scene);
+  }
 
-    confirm() {        
-        this.scene.events.emit("Enemy", this.menuItemIndex);
-    }
+  confirm() {
+    this.scene.events.emit('Enemy', this.menuItemIndex);
+  }
 }
 
-export { EnemiesMenu }
+export { EnemiesMenu };

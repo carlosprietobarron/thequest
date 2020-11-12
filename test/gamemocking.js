@@ -1,12 +1,12 @@
 import 'jest-canvas-mock';
-import Phaser from "phaser";
-import { BootScene } from '../public/src/bootScene'
-import { WorldScene} from '../public/src/worldScene'
-import { BattleScene } from '../public/src/battleScene'
-import { FinalBattleScene } from '../public/src/finalbattle'
-import { FinUIScene } from '../public/src/fin-uiscene'
-import { UIScene } from '../public/src/UIScene'
-import { GameEndScene } from '../public/src/gameendscene'
+import Phaser from 'phaser';
+import { BootScene } from '../public/src/bootScene';
+import { WorldScene } from '../public/src/worldScene';
+import { BattleScene } from '../public/src/battleScene';
+import { FinalBattleScene } from '../public/src/finalbattle';
+import { FinUIScene } from '../public/src/fin-uiscene';
+import { UIScene } from '../public/src/UIScene';
+import { GameEndScene } from '../public/src/gameendscene';
 
 const startGame = (() => {
   const mockConfig = {
@@ -20,9 +20,9 @@ const startGame = (() => {
     physics: {
       default: 'arcade',
       arcade: {
-          gravity: { y: 0 },
-          debug: true
-      }
+        gravity: { y: 0 },
+        debug: true,
+      },
     },
     scene: [
       BootScene,
@@ -31,8 +31,8 @@ const startGame = (() => {
       FinalBattleScene,
       UIScene,
       FinUIScene,
-      GameEndScene
-      ],
+      GameEndScene,
+    ],
   };
 
   const game = () => new Phaser.Game(mockConfig);

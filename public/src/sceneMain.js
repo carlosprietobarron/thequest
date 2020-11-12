@@ -1,15 +1,17 @@
 class SceneMain extends Phaser.Scene {
-    constructor() {
-        super('SceneMain');
-    }
-    preload()
-    {
-    	
-    }
-    create() {
-        console.log("Ready!");
-    }
-    update() {}
+  constructor() {
+    super('SceneMain');
+  }
+
+  preload() {
+
+  }
+
+  create() {
+    console.log('Ready!');
+  }
+
+  update() {}
 }
 
-export { SceneMain }
+export { SceneMain };

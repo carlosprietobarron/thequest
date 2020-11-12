@@ -1,17 +1,17 @@
 class User {
-   constructor(name, score = 0){
-     this.name = name;
-     this.score = score;
-   }
+  constructor(name, score = 0) {
+    this.name = name;
+    this.score = score;
+  }
 
-   incrementScore(points){
-     this.score += points;
-     localStorage.setItem('user', JSON.stringify(this));
-   }
+  incrementScore(points) {
+    this.score += points;
+    localStorage.setItem('user', JSON.stringify(this));
+  }
 
-   score(){
-     return this.score;
-   }
+  score() {
+    return this.score;
+  }
 }
 
-export { User }
+export { User };

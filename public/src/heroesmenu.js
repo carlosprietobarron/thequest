@@ -1,10 +1,9 @@
-import { Menu } from './menu'
+import { Menu } from './menu';
 
-class HeroesMenu extends Menu{
-    
-    constructor(x, y, scene) {
-        super( x, y, scene);                    
-    }
+class HeroesMenu extends Menu {
+  constructor(x, y, scene) {
+    super(x, y, scene);
+  }
 }
 
-export { HeroesMenu }
+export { HeroesMenu };

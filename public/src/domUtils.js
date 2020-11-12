@@ -23,18 +23,20 @@ const domUtils = (function du() {
     const el = document.getElementById(id);
     return el;
   };
-  
+
   const dismissComponent = (id) => {
     const el = document.getElementById(id);
     el.hidden = true;
   };
-  
+
   const showComponent = (id) => {
     const el = document.getElementById(id);
     el.hidden = false;
   };
 
-  return { deleteEleContent, setAttributes, eventFire, element, dismissComponent, showComponent };
+  return {
+    deleteEleContent, setAttributes, eventFire, element, dismissComponent, showComponent,
+  };
 }());
 
 export { domUtils };
