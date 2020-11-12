@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { ItemFind } from "./items";
+import { Enemy } from "./enemy"
 import { User } from './user'
 
 
@@ -77,8 +78,8 @@ class WorldScene extends Phaser.Scene{
        //spawn enemies and obstacles
        this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
         for(var i = 0; i < 30; i++) {
-            var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-            var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+            let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+            let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
             // parameters are x, y, width, height
             this.spawns.create(x, y, 20, 20);            
         }        
@@ -89,34 +90,41 @@ class WorldScene extends Phaser.Scene{
 
         this.items = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
         //item1
-        var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-        var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+        let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+        let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
         this.item1 = this.physics.add.sprite(x, y, 'item', 4);
         this.hammer = new ItemFind(this, x, y, 'item', 4, "thor hammer", 5 );
         console.log(this.hammer);
         this.physics.add.overlap(this.player, this.item1, this.onFindItem, false, this);
         //item2
-        var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-        var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+        x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+        y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
         this.item2 = this.physics.add.sprite(x, y, 'item', 11);
         this.ring_power = new ItemFind(this, x, y, 'item', 11, "ring of power", 7 );
         this.physics.add.overlap(this.player, this.item2, this.onFindItem, false, this);
         
         //item3
-        var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-        var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+        x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+        y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
         this.item3 = this.physics.add.sprite(x, y, 'item', 12);
         this.ring_hero = new ItemFind(this, x, y, 'item', 12, "ring of hero", 7 );
         this.physics.add.overlap(this.player, this.item3, this.onFindItem, false, this);
         //item4
-        var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-        var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+        x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+        y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
         this.item4 = this.physics.add.sprite(x, y, 'item', 17);
         this.key_tres = new ItemFind(this, x, y, 'item', 17, "treasure key", 10 );
         this.physics.add.overlap(this.player, this.item4, this.onFindItem, false, this);
 
         this.physics.add.overlap(this.player, this.items, this.onFindItem, false, this);
-
+        
+        //last enemy
+        x = 580;
+        y = 200;
+        this.bigBoss = new Enemy(this, x, y, "boss", null, "BigBoss", 80, 10);
+        this.boss = this.physics.add.sprite(x, y, 'boss');
+        //this.add.existing(this.boss);
+        this.physics.add.overlap(this.player, this.boss, this.onMeetBigBoss, false, this);
 
 
     } // create end
@@ -192,6 +200,21 @@ class WorldScene extends Phaser.Scene{
         
     }
 
+    onMeetBigBoss(player, zone) {
+      
+        // we move the zone to some other location
+       zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+       zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);       
+
+       // start battle 
+       // shake the world
+       this.cameras.main.shake(300);
+       this.cameras.main.flash(1000);
+       // this.cameras.main.fade(1000);
+       this.scene.switch('FinalBattleScene');    
+       
+   }
+
     onFindItem(player, zone) {
       
         // we move the zone to some other location
@@ -216,9 +239,12 @@ class WorldScene extends Phaser.Scene{
            default:
                break;
        }
+       const userData = JSON.parse(localStorage.getItem('user'));
+       this.userplayer.name = userData.name;
+       this.userplayer.score = userData.score;
        console.log("before", this.userplayer);
-        this.userplayer.incrementScore(found.value);
-        console.log("after", this.userplayer);
+       this.userplayer.incrementScore(found.value);
+       console.log("after", this.userplayer);
        // start battle 
        // shake the world
        this.cameras.main.shake(300);

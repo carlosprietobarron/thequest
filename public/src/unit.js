@@ -15,7 +15,8 @@ class Unit extends Phaser.GameObjects.Sprite {
 
     attack(target) {
         if (target.living){
-        target.takeDamage(this.damage);
+        let dam = Phaser.Math.RND.between(0, this.damage);
+        target.takeDamage(dam);
         this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
         }
     }

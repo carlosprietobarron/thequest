@@ -1,8 +1,7 @@
 import Phaser from "phaser";
 import { User } from "./user";
 import { domUtils } from './domUtils';
-import spritesheet from '../assets/map/spritesheet.png'
-import { WorldScene } from './worldScene'
+
 
 class BootScene extends Phaser.Scene {
  
@@ -18,6 +17,8 @@ class BootScene extends Phaser.Scene {
 
         //load items images
         this.load.spritesheet('item', './assets/items.png', { frameWidth: 16, frameHeight: 16 });
+        //load final boss
+        this.load.spritesheet('boss', './assets/bigboss.png', { frameWidth: 32, frameHeight: 32 });
         // map tiles
         this.load.image('tiles', './assets/map/roguelikeSheet.png');
         
@@ -100,6 +101,8 @@ class BootScene extends Phaser.Scene {
     // this.scene.start("WorldScene");
     }
       saveUser() { // eslint-disable-line class-methods-use-this
+        const scoreform = domUtils.element('game-end');
+        scoreform.style.display = 'none';
         const userName = domUtils.element('nameInput');
         const save = domUtils.element('startbtn');
         localStorage.clear();

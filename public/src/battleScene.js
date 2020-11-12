@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { PlayerCharacter } from './playerCharacter';
 import { Enemy} from './enemy'
+import { User } from './user'
 
 class BattleScene extends Phaser.Scene {
    
@@ -18,6 +19,10 @@ class BattleScene extends Phaser.Scene {
         // on wake event we call startBattle too
         this.sys.events.on('wake', this.startBattle, this)
 
+        const userData = JSON.parse(localStorage.getItem('user'));
+        this.userplayer = new User(userData.name, userData.score);
+        console.log(this.userplayer);
+
         //const timeEvent = this.time.addEvent({delay: 2000, callback: this.exitBattle, callbackScope: this});
 
         //this.sys.events.on('wake', this.wake, this);
@@ -32,10 +37,10 @@ class BattleScene extends Phaser.Scene {
         const mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
         this.add.existing(mage);            
         
-        const dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
+        const dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 30, 3);
         this.add.existing(dragonblue);
         
-        const dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
+        const dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 30, 3);
         this.add.existing(dragonOrange);
         
         // array with heroes
@@ -56,10 +61,18 @@ class BattleScene extends Phaser.Scene {
     }
 
     nextTurn() {
-        if(this.checkEndBattle()) {           
+        let aftermath = this.checkEndBattle();
+        if (aftermath === 'victory'){
             this.endBattle();
+            return;        }
+        if (aftermath === 'gameover'){
+            this.exitGame();
             return;
         }
+        // if(this.checkEndBattle()) {           
+        //     this.endBattle();
+        //     return;
+        // }
         do {
             this.index++;
             // if there are no more units, we start again from the first one
@@ -97,7 +110,16 @@ class BattleScene extends Phaser.Scene {
             if(this.heroes[i].living)
                 gameOver = false;
         }
-        return victory || gameOver;
+        if (victory ){
+            console.log("before", this.userplayer);
+            this.userplayer.incrementScore(20);
+            console.log("after", this.userplayer); 
+            return 'victory' 
+        }
+        if (gameOver) {
+            return 'gameOver';
+        }
+        return 'continue';
     }
 
     endBattle() {       
@@ -127,6 +149,11 @@ class BattleScene extends Phaser.Scene {
     exitBattle() {
         this.scene.sleep('UIScene');
         this.scene.switch('WorldScene');
+    }
+
+    exitGame(){
+        this.scene.sleep('UIScene');
+        this.scene.switch('GameEndScene');
     }
 
     wake() {

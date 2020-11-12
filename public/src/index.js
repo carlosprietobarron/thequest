@@ -2,7 +2,10 @@ import Phaser from "phaser";
 import { BootScene } from './bootScene'
 import { WorldScene} from './worldScene'
 import { BattleScene } from './battleScene'
+import { FinalBattleScene } from './finalbattle'
+import { FinUIScene } from './fin-uiscene'
 import { UIScene } from './UIScene'
+import { GameEndScene } from './gameendscene'
 
   var config = {
     type: Phaser.AUTO,
@@ -23,7 +26,10 @@ import { UIScene } from './UIScene'
       BootScene,
       WorldScene,
       BattleScene,
-      UIScene
+      FinalBattleScene,
+      UIScene,
+      FinUIScene,
+      GameEndScene
       ]
     };
 

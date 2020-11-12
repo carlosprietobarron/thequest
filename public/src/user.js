@@ -6,6 +6,7 @@ class User {
 
    incrementScore(points){
      this.score += points;
+     localStorage.setItem('user', JSON.stringify(this));
    }
 
    score(){
