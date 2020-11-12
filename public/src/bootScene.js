@@ -44,7 +44,6 @@ class BootScene extends Phaser.Scene {
 
     this.load.on('progress', (percentage) => {
       loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percentage, 50);
-      console.log(percentage);
     });
   }
 
@@ -67,22 +66,18 @@ class BootScene extends Phaser.Scene {
     this.playbutton.setInteractive();
 
     this.playbutton.on('pointerover', () => {
-      console.log('create button event hover');
       this.playbutton.setTexture('startbtn-hover');
     }, this);
 
     this.playbutton.on('pointerdown', () => {
-      console.log('create button event down');
       this.playbutton.setTexture('startbtn-hover');
     }, this);
 
     this.playbutton.on('pointerout', () => {
-      console.log('create button event out');
       this.playbutton.setTexture('startbtn');
     }, this);
 
     this.playbutton.on('pointerup', () => {
-      console.log('create button event hover');
       this.playbutton.setTexture('startbtn');
       if (localStorage.getItem('user').length > 0) {
         this.sound.stopAll();

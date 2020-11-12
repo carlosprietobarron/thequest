@@ -6,7 +6,6 @@ import { TestScheduler } from '../node_modules/jest';
 describe('Game start creates a new game', () => {
   test('Returns an object', () => {
     const newGame = startGame.game();
-    console.log('newGame...is', newGame);
     expect(typeof newGame).toBe('object');
   });
 });

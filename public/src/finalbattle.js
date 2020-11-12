@@ -8,8 +8,6 @@ class FinalBattleScene extends Phaser.Scene {
     super({ key: 'FinalBattleScene' });
   }
 
-  preload() {}
-
   create() {
     // set the background of the main scene green
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
@@ -20,7 +18,6 @@ class FinalBattleScene extends Phaser.Scene {
 
     const userData = JSON.parse(localStorage.getItem('user'));
     this.userplayer = new User(userData.name, userData.score);
-    console.log(this.userplayer);
   }
 
   startBattle() {
@@ -47,10 +44,6 @@ class FinalBattleScene extends Phaser.Scene {
     this.scene.run('FinUIScene');
   }
 
-  update() {
-
-  }
-
   nextTurn() {
     const aftermath = this.checkEndBattle();
     if (aftermath === 'victory') {
@@ -61,18 +54,13 @@ class FinalBattleScene extends Phaser.Scene {
       this.scene.switch('GameEndScene');
       return;
     }
-    // if(this.checkEndBattle()) {
-    //     this.endBattle();
-    //     return;
-    // }
 
     do {
-      this.index++;
+      this.index += 1;
       // if there are no more units, we start again from the first one
       if (this.index >= this.units.length) {
         this.index = 0;
       }
-      console.log('unit', this.units[this.index].type);
     } while (!this.units[this.index].living);
 
     if (this.units[this.index]) {
@@ -93,18 +81,16 @@ class FinalBattleScene extends Phaser.Scene {
   checkEndBattle() {
     let victory = true;
     // if all enemies are dead we have victory
-    for (var i = 0; i < this.enemies.length; i += 1) {
+    for (let i = 0; i < this.enemies.length; i += 1) {
       if (this.enemies[i].living) victory = false;
     }
     let gameOver = true;
     // if all heroes are dead we have game over
-    for (var i = 0; i < this.heroes.length; i += 1) {
+    for (let i = 0; i < this.heroes.length; i += 1) {
       if (this.heroes[i].living) gameOver = false;
     }
     if (victory === true) {
-      console.log('before', this.userplayer);
       this.userplayer.incrementScore(20);
-      console.log('after', this.userplayer);
       return 'victory';
     }
     if (gameOver) {
@@ -130,7 +116,7 @@ class FinalBattleScene extends Phaser.Scene {
 
   // when the player have selected the enemy to be attacked
   receivePlayerSelection(action, target) {
-    if (action == 'attack') {
+    if (action === 'attack') {
       this.units[this.index].attack(this.enemies[target]);
     }
     // next turn in 3 seconds

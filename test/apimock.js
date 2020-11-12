@@ -16,7 +16,6 @@ const getData = () => fetch('https://us-central1-js-capstone-backend.cloudfuncti
 
 const getScores = async () => {
   const data = await getData();
-  console.log('data', data);
   return data.result;
 };
 

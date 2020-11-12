@@ -8,21 +8,17 @@ class WorldScene extends Phaser.Scene {
     super({ key: 'WorldScene' });
   }
 
-  preload() {
-    // load the resources here
-  }
-
   create() {
     // get user data
     const userData = JSON.parse(localStorage.getItem('user'));
     this.userplayer = new User(userData.name, userData.score);
-    console.log(this.userplayer);
+
     // set the map
 
     const map = this.make.tilemap({ key: 'map' });
     const tiles = map.addTilesetImage('roguelikeSheet', 'tiles');
 
-    const grass = map.createStaticLayer('Grass', tiles, 0, 0);
+    map.createStaticLayer('Grass', tiles, 0, 0);
     const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
     obstacles.setCollisionByExclusion([-1]);
 
@@ -73,7 +69,7 @@ class WorldScene extends Phaser.Scene {
 
     // spawn enemies and obstacles
     this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 30; i += 1) {
       const x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
       const y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
       // parameters are x, y, width, height
@@ -90,7 +86,6 @@ class WorldScene extends Phaser.Scene {
     let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     this.item1 = this.physics.add.sprite(x, y, 'item', 4);
     this.hammer = new ItemFind(this, x, y, 'item', 4, 'thor hammer', 5);
-    console.log(this.hammer);
     this.physics.add.overlap(this.player, this.item1, this.onFindItem, false, this);
     // item2
     x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
@@ -192,7 +187,6 @@ class WorldScene extends Phaser.Scene {
   onFindItem(player, zone) {
     // we move the zone to some other location
     const idx = zone.frame.name;
-    console.log('will increment', idx);
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     let found;
@@ -215,9 +209,7 @@ class WorldScene extends Phaser.Scene {
     const userData = JSON.parse(localStorage.getItem('user'));
     this.userplayer.name = userData.name;
     this.userplayer.score = userData.score;
-    console.log('before', this.userplayer);
     this.userplayer.incrementScore(found.value);
-    console.log('after', this.userplayer);
     // start battle
     // shake the world
     this.cameras.main.shake(300);

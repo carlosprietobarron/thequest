@@ -21,7 +21,7 @@ class Menu extends Phaser.GameObjects.Container {
   moveSelectionUp() {
     this.menuItems[this.menuItemIndex].deselect();
     do {
-      this.menuItemIndex--;
+      this.menuItemIndex -= 1;
       if (this.menuItemIndex < 0) this.menuItemIndex = this.menuItems.length - 1;
     } while (!this.menuItems[this.menuItemIndex].active);
     this.menuItems[this.menuItemIndex].select();
@@ -30,7 +30,7 @@ class Menu extends Phaser.GameObjects.Container {
   moveSelectionDown() {
     this.menuItems[this.menuItemIndex].deselect();
     do {
-      this.menuItemIndex++;
+      this.menuItemIndexi += 1;
       if (this.menuItemIndex >= this.menuItems.length) this.menuItemIndex = 0;
     } while (!this.menuItems[this.menuItemIndex].active);
     this.menuItems[this.menuItemIndex].select();
@@ -42,9 +42,9 @@ class Menu extends Phaser.GameObjects.Container {
     this.menuItems[this.menuItemIndex].deselect();
     this.menuItemIndex = index;
     while (!this.menuItems[this.menuItemIndex].active) {
-      this.menuItemIndex++;
+      this.menuItemIndexi += 1;
       if (this.menuItemIndex >= this.menuItems.length) this.menuItemIndex = 0;
-      if (this.menuItemIndex == index) return;
+      if (this.menuItemIndex === index) return;
     }
     this.menuItems[this.menuItemIndex].select();
     this.selected = true;
@@ -57,12 +57,8 @@ class Menu extends Phaser.GameObjects.Container {
     this.selected = false;
   }
 
-  confirm() {
-    // wen the player confirms his slection, do the action
-  }
-
   clear() {
-    for (let i = 0; i < this.menuItems.length; i++) {
+    for (let i = 0; i < this.menuItems.length; i += 1) {
       this.menuItems[i].destroy();
     }
     this.menuItems.length = 0;
@@ -71,7 +67,7 @@ class Menu extends Phaser.GameObjects.Container {
 
   remap(units) {
     this.clear();
-    for (let i = 0; i < units.length; i++) {
+    for (let i = 0; i < units.length; i += 1) {
       const unit = units[i];
       unit.setMenuItem(this.addMenuItem(unit.type));
     }

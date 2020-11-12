@@ -9,8 +9,6 @@ class FinUIScene extends Phaser.Scene {
     super({ key: 'FinUIScene' });
   }
 
-  preload() {}
-
   create() {
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0xffffff);
@@ -70,8 +68,6 @@ class FinUIScene extends Phaser.Scene {
     // first move
     this.battleScene.nextTurn();
   }
-
-  update() {}
 
   onEnemy(index) {
     this.heroesMenu.deselect();

@@ -28,5 +28,6 @@ module.exports = {
     'no-mixed-operators': 'off',
     'no-restricted-globals': 'off',
     "no-empty": "off",
+    "no-useless-constructor": "off"
   },
 };
