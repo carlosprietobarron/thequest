@@ -23,7 +23,8 @@ class BootScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', './assets/map/finalmap.json');
 
     // our two characters
-    this.load.spritesheet('player', './assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
+    this.load.spritesheet('player', './assets/charsprites.png', { frameWidth: 16, frameHeight: 16 });
+    // this.load.spritesheet('player', './assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 })
 
     // load enemies
     this.load.image('dragonblue', './assets/dragonblue.png');
