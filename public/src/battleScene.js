@@ -101,7 +101,6 @@ class BattleScene extends Phaser.Scene {
     }
     if (victory) {
       this.userplayer.incrementScore(20);
-
       return 'victory';
     }
     if (gameOver) {

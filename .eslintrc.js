@@ -28,6 +28,8 @@ module.exports = {
     'no-mixed-operators': 'off',
     'no-restricted-globals': 'off',
     "no-empty": "off",
-    "no-useless-constructor": "off"
+    "no-useless-constructor": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off"
   },
 };
