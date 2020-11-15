@@ -87,12 +87,14 @@ class WorldScene extends Phaser.Scene {
     let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     this.item1 = this.physics.add.sprite(x, y, 'item', 4);
     this.hammer = new ItemFind(this, x, y, 'item', 4, 'thor hammer', 5);
+    this.hammer.setVisible(true);
     this.physics.add.overlap(this.player, this.item1, this.onFindItem, false, this);
     // item2
     x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     this.item2 = this.physics.add.sprite(x, y, 'item', 11);
     this.ring_power = new ItemFind(this, x, y, 'item', 11, 'ring of power', 7);
+    this.ring_power.setVisible(true);
     this.physics.add.overlap(this.player, this.item2, this.onFindItem, false, this);
 
     // item3
@@ -100,12 +102,14 @@ class WorldScene extends Phaser.Scene {
     y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     this.item3 = this.physics.add.sprite(x, y, 'item', 12);
     this.ring_hero = new ItemFind(this, x, y, 'item', 12, 'ring of hero', 7);
+    this.ring_hero.setVisible(true);
     this.physics.add.overlap(this.player, this.item3, this.onFindItem, false, this);
     // item4
     x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     this.item4 = this.physics.add.sprite(x, y, 'item', 17);
     this.key_tres = new ItemFind(this, x, y, 'item', 17, 'treasure key', 10);
+    this.key_tres.setVisible(true);
     this.physics.add.overlap(this.player, this.item4, this.onFindItem, false, this);
 
     this.physics.add.overlap(this.player, this.items, this.onFindItem, false, this);
