@@ -22,14 +22,14 @@ class FinalBattleScene extends Phaser.Scene {
 
   startBattle() {
     // player character - warrior
-    const warrior = new PlayerCharacter(this, 250, 50, 'player', 1, 'Warrior', 100, 20);
+    const warrior = new PlayerCharacter(this, 250, 50, 'player', 73, 'Warrior', 100, 20);
     this.add.existing(warrior);
 
     // player character - mage
-    const mage = new PlayerCharacter(this, 250, 100, 'player', 4, 'Mage', 80, 8);
+    const mage = new PlayerCharacter(this, 250, 100, 'player', 21, 'Mage', 80, 8);
     this.add.existing(mage);
 
-    const bigboss = new Enemy(this, 50, 50, 'boss', null, 'BigBoss', 80, 8);
+    const bigboss = new Enemy(this, 50, 50, 'boss', null, 'BigBoss', 100, 15);
     this.add.existing(bigboss);
 
     // array with heroes

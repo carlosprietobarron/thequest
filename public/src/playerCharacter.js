@@ -6,7 +6,7 @@ class PlayerCharacter extends Unit {
     // flip the image so I don"t have to edit it manually
     this.flipX = true;
 
-    this.setScale(2);
+    this.setScale(1);
   }
 }
 

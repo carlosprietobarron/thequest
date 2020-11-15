@@ -21,7 +21,8 @@ class WorldScene extends Phaser.Scene {
     map.createStaticLayer('Grass', tiles, 0, 0);
     const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
     obstacles.setCollisionByExclusion([-1]);
-
+    // Create score text
+    this.scoreLabel = this.add.text(0,0, 'Score: 0');
     // insert player
     this.player = this.physics.add.sprite(50, 100, 'player', 48);
     // player boundaries
@@ -123,6 +124,7 @@ class WorldScene extends Phaser.Scene {
     this.cursors.right.reset();
     this.cursors.up.reset();
     this.cursors.down.reset();
+    this.updateScore();
   }
 
   update() {
@@ -156,6 +158,9 @@ class WorldScene extends Phaser.Scene {
     } else {
       this.player.anims.stop();
     }
+
+    this.scoreLabel.x = this.cameras.main.scrollX;
+    this.scoreLabel.y = this.cameras.main.scrollY;
   }// update end
 
   onMeetEnemy(player, zone) {
@@ -210,12 +215,20 @@ class WorldScene extends Phaser.Scene {
     this.userplayer.name = userData.name;
     this.userplayer.score = userData.score;
     this.userplayer.incrementScore(found.value);
+    this.updateScore();
     // start battle
     // shake the world
     this.cameras.main.shake(300);
     this.cameras.main.flash(1000);
     // this.cameras.main.fade(1000);
     // this.scene.switch('BattleScene');
+  }
+
+  updateScore() {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    this.userplayer = new User(userData.name, userData.score);
+    const scoreText = `Score: ${userData.score}`;
+    this.scoreLabel.text = scoreText;
   }
 }
 
