@@ -10,6 +10,7 @@
 - CSS
 - Javascript
 - Phaser 3
+- Eslint
 - Score API
 
 ## Live Demo
